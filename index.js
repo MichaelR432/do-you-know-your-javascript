@@ -66,6 +66,7 @@ function start() {
 
         if (timeRemaining <= 0) {
             clearInterval(seconds);
+            end();
         }
 
         changeQuestion();
@@ -94,3 +95,77 @@ function changeQuestion() {
 }
 
 changeQuestion();
+
+// alerting user if question is wrong of right
+
+button1.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    if (button1.textContent === selectedQuestion.correctChoice) {
+        alert("Your Choice is Correct!");
+    } else {
+        alert("Your Choice is Wrong");
+        // takes away 15 secs
+        timeRemaining -= 15
+    }
+    quizIndex++;
+    if (index === quizContent.length) {
+        end();
+    } else {
+        changeQuestion();
+    }
+})
+
+button2.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    if (button2.textContent === selectedQuestion.correctChoice) {
+        alert("Your Choice is Correct!");
+    } else {
+        alert("Your Choice is Wrong");
+        // takes away 15 secs
+        timeRemaining -= 15
+    }
+    quizIndex++;
+    if (index === quizContent.length) {
+        end();
+    } else {
+        changeQuestion();
+    }
+})
+
+button3.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    if (button3.textContent === selectedQuestion.correctChoice) {
+        alert("Your Choice is Correct!");
+    } else {
+        alert("Your Choice is Wrong");
+        // takes away 15 secs
+        timeRemaining -= 15
+    }
+    quizIndex++;
+    if (index === quizContent.length) {
+        end();
+    } else {
+        changeQuestion();
+    }
+})
+
+button4.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    if (button4.textContent === selectedQuestion.correctChoice) {
+        alert("Your Choice is Correct!");
+    } else {
+        alert("Your Choice is Wrong");
+        // takes away 15 secs
+        timeRemaining -= 15
+    }
+    quizIndex++;
+    if (index === quizContent.length) {
+        end();
+    } else {
+        changeQuestion();
+    }
+})
