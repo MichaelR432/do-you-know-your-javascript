@@ -1,14 +1,14 @@
 // variables for quiz game
 
 let timeRemaining = 60;
-let timer = document.querySelector("#timer")
 let question = document.querySelector("#question");
-let button1 = document.querySelector("#button1");
-let button2 = document.querySelector("#button2");
-let button3 = document.querySelector("#button3");
-let button4 = document.querySelector("#button4");
-let quizIndex = 0;
-let selectedQuestion = quizContent[0];
+let button1 = document.querySelector("#buttonQ1");
+let button2 = document.querySelector("#buttonQ2");
+let button3 = document.querySelector("#buttonQ3");
+let button4 = document.querySelector("#buttonQ4");
+let submit = document.querySelector('#submit')
+let startBtn = document.querySelector('#startBtn')
+let time = document.querySelector(".time")
 
 // setting the array of questions to match html id's
 
@@ -50,6 +50,8 @@ let quizContent = [
 ];
 
 // setting quiz index and html buttons to assigned quizContent
+let quizIndex = 0;
+let selectedQuestion = quizContent[0];
 question.textContent = selectedQuestion.question;
 button1.textContent = selectedQuestion.choices[0];
 button2.textContent = selectedQuestion.choices[1];
@@ -62,16 +64,16 @@ button4.textContent = selectedQuestion.choices[3];
 function start() {
     seconds = setInterval(function () {
         timeRemaining--;
-        timer.textContent = "Time left:" + timeRemaining;
+        time.textContent = "Time left: " + timeRemaining;
 
         if (timeRemaining <= 0) {
             clearInterval(seconds);
             end();
         }
-
-        changeQuestion();
         
     }, 1000);
+
+    changeQuestion();
 }
 
 start();
@@ -80,7 +82,11 @@ start();
 
 function end() {
     clearInterval(seconds);
+    let yourScore = document.querySelector('#yourScore');
+    let topScores = document.querySelector('#topScoresDiv');
 
+    topScores.style.display = 'block';
+    yourScore.textContent = 'Your Time: ' + timeRemaining;
 }
 
 // here is the function to move to a new question using assigned values from above
@@ -98,8 +104,8 @@ changeQuestion();
 
 // alerting user if question is wrong of right
 
-button1.addEventListener("click", function (e) {
-    e.preventDefault();
+button1.addEventListener("click", function (event) {
+    event.preventDefault();
 
     if (button1.textContent === selectedQuestion.correctChoice) {
         alert("Your Choice is Correct!");
@@ -109,15 +115,15 @@ button1.addEventListener("click", function (e) {
         timeRemaining -= 15
     }
     quizIndex++;
-    if (index === quizContent.length) {
+    if (quizIndex === quizContent.length) {
         end();
     } else {
         changeQuestion();
     }
 })
 
-button2.addEventListener("click", function (e) {
-    e.preventDefault();
+button2.addEventListener("click", function (event) {
+    event.preventDefault();
 
     if (button2.textContent === selectedQuestion.correctChoice) {
         alert("Your Choice is Correct!");
@@ -127,15 +133,15 @@ button2.addEventListener("click", function (e) {
         timeRemaining -= 15
     }
     quizIndex++;
-    if (index === quizContent.length) {
+    if (quizIndex === quizContent.length) {
         end();
     } else {
         changeQuestion();
     }
 })
 
-button3.addEventListener("click", function (e) {
-    e.preventDefault();
+button3.addEventListener("click", function (event) {
+    event.preventDefault();
 
     if (button3.textContent === selectedQuestion.correctChoice) {
         alert("Your Choice is Correct!");
@@ -145,15 +151,15 @@ button3.addEventListener("click", function (e) {
         timeRemaining -= 15
     }
     quizIndex++;
-    if (index === quizContent.length) {
+    if (quizIndex === quizContent.length) {
         end();
     } else {
         changeQuestion();
     }
 })
 
-button4.addEventListener("click", function (e) {
-    e.preventDefault();
+button4.addEventListener("click", function (event) {
+    event.preventDefault();
 
     if (button4.textContent === selectedQuestion.correctChoice) {
         alert("Your Choice is Correct!");
@@ -163,9 +169,36 @@ button4.addEventListener("click", function (e) {
         timeRemaining -= 15
     }
     quizIndex++;
-    if (index === quizContent.length) {
+    if (quizIndex === quizContent.length) {
         end();
     } else {
         changeQuestion();
     }
 })
+
+// placing in topScores into local storage
+
+function saveScore() {
+    let userName = document.querySelector('#userName');
+    // removing excess blank space from user name entry as string value
+    let userNameCleanup = userName.value.trim();
+
+    if (userNameCleanup !== "") {
+        // if value is null from local storage this will turn into an empty string array
+        let topScores = JSON.parse(window.localStorage.getItem("top-scores") || "[]");
+    
+        let newScore = {
+            score: timeRemaining,
+            userName: userNameCleanup,
+        }
+
+        // pushing/replacing value of new score into top score array
+        topScores.push(newScore);
+        window.localStorage.setItem("top-scores", JSON.stringify(topScores));
+
+        window.location.href = 'index.html';
+    
+    }
+}
+
+submit.onclick = saveScore;

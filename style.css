@@ -40,7 +40,7 @@ header nav ul li p {
 }
 
 .section1 {
-  padding: 60px;
+  padding: 30px 30px;
 }
 
 .instruction {
@@ -60,5 +60,43 @@ header nav ul li p {
 }
 
 #quizBlock {
-    padding: 60px;
+    padding: 30px 30px;
+}
+
+#topScoresDiv {
+  padding: 30px 30px;
+}
+
+.timerText {
+  color: black;
+  font-weight: 700;
+}
+
+.startQuizBtn {
+  border: none;
+  background-color: #18373a;
+  color:white;
+  padding: 20px;
+  border-radius: 10%;
+}
+
+.quizBtn {
+  border: none;
+  background-color: #18373a;
+  color:white;
+  padding: 20px;
+  border-radius: 10%;
+
+}
+
+.inputDiv {
+  border-color: #18373a;
+  
+}
+
+.inputBtn {
+   background-color: #18373a;
+   color: white;
+   padding: 5px 20px;
+   border: none;
 }
